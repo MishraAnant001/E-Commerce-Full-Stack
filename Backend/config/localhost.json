@@ -1,0 +1,5 @@
+{
+    "PORT":8000,
+    "SECRETKEY":"anantmanojmishra",
+    "MONGOURI":"mongodb+srv://anantmanojmishra:kNp8tfu3NJ4SfBXp@backenddb.kuqejt8.mongodb.net/ecommerce_angular?retryWrites=true&w=majority&appName=BackendDB"
+}
