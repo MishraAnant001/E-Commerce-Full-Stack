@@ -1,0 +1,9 @@
+<div class="sidebar">
+  <a routerLink="/admin/dashboard" routerLinkActive="active" >Dashboard</a>
+  <a routerLink="/admin/product" routerLinkActive="active" >products</a>
+  <a routerLink="/admin/category" routerLinkActive="active" >categories</a>
+  <a (click)="logoutUser()">Logout</a>
+</div>
+<div class="content">
+  <router-outlet></router-outlet>
+</div>

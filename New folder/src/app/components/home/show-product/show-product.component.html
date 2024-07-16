@@ -1,0 +1,83 @@
+<div class="row p-3">
+    <div class="col-4">
+        <label for="" class="form-label">Search</label>
+        <div class="d-flex">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
+                [(ngModel)]="search">
+            <button class="btn btn-outline-success" (click)="applyFilters()" type="button">Search</button>
+        </div>
+    </div>
+
+    <div class="col-4">
+        <div class="mb-3">
+            <label for="category" class="form-label">Filter by Category</label>
+            <select class="form-select form-select" id="category" [(ngModel)]="category">
+                <option *ngFor="let category of categoryData" value="{{category.name}}">{{category.name}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="col-4">
+        <div class="mb-3">
+            <label for="price" class="form-label">Filter by price</label>
+            <select class="form-select form-select" name="" id="price" [(ngModel)]="priceRange">
+                <option value="0-10000">0-10000</option>
+                <option value="10000-50000">10000-50000</option>
+                <option value="50000-100000">50000-100000</option>
+                <option value="100000-500000">100000-500000</option>
+                <option value="500000-above">500000-above</option>
+            </select>
+            <div class="d-flex justify-content-end mt-2">
+                <button class="btn btn-outline-primary" (click)="applyFilters()">Apply Filters</button>
+                <button class="btn btn-outline-danger ms-2" (click)="clearFilters()">Clear filters</button>
+            </div>
+        </div>
+    </div>
+</div>
+<p class="px-3" *ngIf="showSearch">Showing results for : <strong>{{search}}</strong></p>
+<div class="d-flex flex-wrap m-0 p-0 justify-content-start" *ngIf="!notFound">
+    <div class="card m-3" style="width: 300px;" *ngFor="let product of productData">
+        <div class="img-container">
+            <img class="img-thumbnail" src="http://localhost:8000/{{product.file}}" alt="Title" />
+        </div>
+        <div class="card-body">
+            <h6 class="card-title">{{product.name}}</h6>
+            <p class="card-text">{{product.price}}</p>
+            <p class="card-text">{{product.category_name}}</p>
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalId"
+                (click)="viewProduct(product)">View</button>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Body -->
+<!-- if you want to close by clicking outside the modal, delete the last endpoint:data-bs-backdrop and data-bs-keyboard -->
+<div class="modal fade" id="modalId" tabindex="-1" role="dialog" aria-labelledby="modalTitleId" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalTitleId">
+                    {{product.name}}
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="text-center">
+
+                    <img src="http://localhost:8000/{{product.file}}" class="img-fluid rounded-start" alt="Card title" />
+                </div>
+                <p class="card-text"><strong>Description :</strong> {{product.description}}</p>
+                <p class="card-text"><strong>Price :</strong> {{product.price}}</p>
+                <p class="card-text"><strong>Category : </strong>{{product.category_name}}</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                    Close
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container w-25 h-25 d-flex justify-content-center align-items-center">
+    <img src="../../../../assets/product_not_found.png" *ngIf="notFound" class="img-fluid" alt="product_not_found">
+</div>

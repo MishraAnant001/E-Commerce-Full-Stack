@@ -1,0 +1,20 @@
+<app-navbar></app-navbar>
+<h3 class="text-center my-2">Cart Details</h3>
+<p-table [value]="products" styleClass="p-datatable-striped" [tableStyle]="{ 'min-width': '50rem' }">
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Product id</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Action</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-product>
+        <tr>
+            <td>{{ product.productid }}</td>
+            <td>{{ product.price }}</td>
+            <td>{{ product.quantity }}</td>
+            <td><button class="btn btn-outline-danger" (click)="removeItem(product)">Remove</button></td>
+        </tr>
+    </ng-template>
+</p-table>
